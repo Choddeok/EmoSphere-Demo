@@ -188,7 +188,11 @@
             html += "<tr>";
           }
           html += '<td style="vertical-align: top;"><p></p>';
-          html += key;
+          if (key === "Emotion-Adaptive Spherical Vector (Weak)" || key === "Emotion-Adaptive Spherical Vector (Medium)" || key === "Emotion-Adaptive Spherical Vector (Strong)") {
+            html += '<strong>' + key + '</strong>';
+          } else {
+            html += key;
+          }
           html +=
             '<div class="text-center"><audio controls="controls"><source src=';
           f = dir + "/" + exp[key] + "/" + audio + ".wav";
