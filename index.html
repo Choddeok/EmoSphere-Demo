@@ -141,7 +141,13 @@
             html += "<tr>";
           }
           html += '<td style="vertical-align: top;"><p></p>';
-          html += key;
+          if (key === "EmoSphere++ (Weak)" || key === "EmoSphere++ (Medium)" || key === "EmoSphere++ (Strong)") {
+            html += '<strong>' + key + '</strong>';
+          } else {
+            html += key;
+          }
+
+
           html +=
             '<div class="text-center"><audio controls="controls"><source src=';
           f = dir + "/" + exp[key] + "/" + audio + ".wav";
@@ -174,7 +180,7 @@
         html += '</th></tr></thead><tbody><tr>'; // 여기서 적절하게 닫는 태그 추가
         html += '<tr><td colspan="5">'; // 새로운 row를 추가하여 선과 이미지를 포함시킴
         html += '<div style="text-align: center;">'; // 이미지를 중앙 정렬하기 위한 div
-        html += '<img src="./' + audio + '_ver2.png" style="width: 95%; height: auto; display: block; margin-left: 60px"'; // 이미지 추가
+        html += '<img src="./' + audio + '.png" style="width: 95%; height: auto; display: block; margin-left: 60px"'; // 이미지 추가
         html += '</div>'; // 이미지를 포함하는 div 닫기
         html += '</td></tr>'; // 선과 이미지를 포함하는 row 닫기
         for (var key in exp) {
@@ -269,7 +275,7 @@
             <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#sytle_transfer">Non-Parallel<br />Style Transfer</a></li>
             <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#emotion_intensity">Emotion Intensity<br /> Controllability</a></li>
             <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#emotion_style_shift">Emotion Style<br />Shift</a></li>
-            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#ablation_study">Ablation<br />Study</a></li>
+            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#ablation_study">Coordinate <br />Transformation</a></li>
           </ul>
         </div>
       </div>
@@ -283,10 +289,10 @@
           EmoSphere++: Emotion-Controllable Zero-Shot Text-to-Speech via Emotion-Adaptive Spherical Vector
         </h1>
         <!-- Masthead Subheading-->
-        <p
-          class="pre-wrap masthead-subheading font-weight-light mb-0 font-italic"
-        >
-          Deok-Hyeon Cho, Hyung-Seok Oh, Seung-Bin Kim and Seong-Whan Lee
+        <p class="pre-wrap masthead-subheading font-weight-light mb-0 font-italic" style="text-align: center;">
+          Deok-Hyeon Cho, Hyung-Seok Oh, Seung-Bin Kim and Seong-Whan Lee 
+          <br>
+          Korea University
         </p>
       </div>
     </header>
@@ -638,29 +644,29 @@
             <script>
               dir = "./wavs/Ablation_transformation";
               exp = {
-                "Emotion-Adaptive Spherical Vector (Weak)": "EASV_w",
-                "Emotion-Adaptive Spherical Vector (Medium)": "EASV_m",
-                "Emotion-Adaptive Spherical Vector (Strong)": "EASV_s",
                 "Spherical Emotion Vector (Weak)": "SEV_w",
                 "Spherical Emotion Vector (Medium)": "SEV_m",
                 "Spherical Emotion Vector (Strong)": "SEV_s",
+                "Emotion-Adaptive Spherical Vector (Weak)": "EASV_w",
+                "Emotion-Adaptive Spherical Vector (Medium)": "EASV_m",
+                "Emotion-Adaptive Spherical Vector (Strong)": "EASV_s",
               };
               audios = {
-                "0015_001433": {
-                  emotion: "Surprise",
-                  script: "This used to be jerrys occupation.",
+                "0018_000388": {
+                  emotion: "Angry",
+                  script: "Hold up my chin, slow and solid.",
                 },
-                "0011_000746": {
+                "0014_000737": {
                   emotion: "Happy",
+                  script: "I think itll encourage me.",
+                },
+                "0011_001446": {
+                  emotion: "Surprise",
                   script: "They never know id regular ran away.",
                 },
-                "0018_001083": {
+                "0011_001084": {
                   emotion: "Sad",
-                  script: "This used to be jerrys occupation.",
-                },
-                "0012_000372": {
-                  emotion: "Angry",
-                  script: "And what are doves. and what are doves.",
+                  script: "A divine wrath made her blue eyes awful .",
                 },
               };
               for (var audio in audios) {
