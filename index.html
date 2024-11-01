@@ -49,12 +49,17 @@
         html += script["script"];
         html += "</i></div></th></tr></thead><tbody><tr>";
           for (var key in exp) {
-            if (idx === 1 || idx === 4 || idx === 10) {
+            if (idx === 1 || idx === 4 || idx === 7 || idx === 9) {
               html += "<tr>";
             }
           
             html += '<td style="vertical-align: top;"><p></p>';
-            html += key;
+
+            if (key === "EmoSphere++ (Proposed)") {
+              html += '<strong>' + key + '</strong>';
+            } else {
+              html += key;
+            }
           
             html += '<div class="text-center"><audio controls="controls"><source src=';
             f = dir + "/" + exp[key] + "/" + audio + ".wav";
@@ -63,7 +68,7 @@
           
             idx += 1;
           
-            if (idx === 3 || idx === 9 || idx === 12) {
+            if (idx === 4 || idx === 7 || idx === 9 || idx === 13) {
               html += "</tr>";
             }
           }
@@ -84,12 +89,16 @@
         html += script["script"];
         html += "</i></div></th></tr></thead><tbody><tr>";
           for (var key in exp) {
-            if (idx === 1 || idx === 4 || idx === 8) {
+            if (idx === 1 || idx === 4 || idx === 7) {
               html += "<tr>";
             }
           
             html += '<td style="vertical-align: top;"><p></p>';
-            html += key;
+            if (key === "EmoSphere++ (Proposed)") {
+              html += '<strong>' + key + '</strong>';
+            } else {
+              html += key;
+            }
           
             html += '<div class="text-center"><audio controls="controls"><source src=';
             f = dir + "/" + exp[key] + "/" + audio + ".wav";
@@ -98,7 +107,7 @@
           
             idx += 1;
           
-            if (idx === 3 || idx === 7 || idx === 10) {
+            if (idx === 4 || idx === 7 || idx === 11) {
               html += "</tr>";
             }
           }
@@ -257,10 +266,8 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#abstract">Abstract</a>
-            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#seen_sytle_transfer">Seen Non-Parallel<br />Style Transfer</a></li>
-            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#unseen_sytle_transfer">Unseen Non-Parallel<br />Style Transfer</a></li>
-            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#seen_emotion_intensity">Seen Speaker<br />Emotion Intensity Controllability</a></li>
-            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#unseen_emotion_intensity">Unseen Speaker<br />Emotion Intensity Controllability</a></li>
+            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#sytle_transfer">Non-Parallel<br />Style Transfer</a></li>
+            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#emotion_intensity">Emotion Intensity<br /> Controllability</a></li>
             <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#emotion_style_shift">Emotion Style<br />Shift</a></li>
             <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#ablation_study">Ablation<br />Study</a></li>
           </ul>
@@ -317,7 +324,7 @@
       </div>
     </section>
 
-    <section class="page-section bg-info text-white mb-0" id="seen_sytle_transfer">
+    <section class="page-section bg-info text-white mb-0" id="sytle_transfer">
       <div class="container">
         <!-- About Section Heading-->
         <div class="text-center">
@@ -345,19 +352,19 @@
                 "YourTTS": "YourTTS",
                 "Generspeech": "Generspeech",
                 "iEmoTTS": "iEmoTTS",
-                "EmoSphere++ (proposed)": "EmoSphere",
-                "w/o Disentangling Module": "wo_Ort",
-                "w/o Orthogonality Loss": "w_Ort",
-                "w/o Vector Quantization": "w_VQ",
+                "EmoSphere++ (Proposed)": "EmoSphere",
+                "EmoSphere++ w/o Disentangling Module": "wo_Ort",
+                "EmoSphere++ w/ Orthogonality Loss": "w_Ort",
+                "EmoSphere++ w/ Vector Quantization": "w_VQ",
               };
               audios = {
-                "0015_000725": {
-                  emotion: "Happy",
-                  script: "She is now choosing skirt to wear.",
-                },
                 "0015_001083": {
                   emotion: "Sad",
                   script: "This used to be jerrys occupation.",
+                },
+                "0015_000725": {
+                  emotion: "Happy",
+                  script: "She is now choosing skirt to wear.",
                 },
               };
               for (var audio in audios) {
@@ -374,7 +381,7 @@
     </section>
 
     
-    <section class="page-section bg-primary text-white mb-0" id="unseen_sytle_transfer">
+    <section class="page-section bg-primary text-white mb-0" id="sytle_transfer">
       <div class="container">
         <!-- About Section Heading-->
         <div class="text-center">
@@ -389,7 +396,7 @@
         </div>
 
         <div class="row">
-          <div id="div4" class="col-lg-auto ml-auto">
+          <div id="div3" class="col-lg-auto ml-auto">
             <script>
               dir = "./wavs/Unseen_non-parallel";
               exp = {
@@ -399,23 +406,23 @@
                 "YourTTS": "YourTTS",
                 "Generspeech": "Generspeech",
                 "iEmoTTS": "iEmoTTS",
-                "EmoSphere++ (proposed)": "EmoSphere",
-                "w/o Disentangling Module": "wo_Ort",
-                "w/o Orthogonality Loss": "w_Ort",
-                "w/o Vector Quantization": "w_VQ",
+                "EmoSphere++ (Proposed)": "EmoSphere",
+                "EmoSphere++ w/o Disentangling Module": "wo_Ort",
+                "EmoSphere++ w/ Orthogonality Loss": "w_Ort",
+                "EmoSphere++ w/ Vector Quantization": "w_VQ",
               };
               audios = {
-                "0013_000733": {
-                  emotion: "Happy",
-                  script: "This used to be jerrys occupation.",
-                },
                 "0013_001075": {
                   emotion: "Sad",
                   script: "She is now choosing skirt to wear.",
                 },
+                "0013_000733": {
+                  emotion: "Happy",
+                  script: "This used to be jerrys occupation.",
+                },
               };
               for (var audio in audios) {
-                div = document.getElementById("div4");
+                div = document.getElementById("div3");
                 script = audios[audio];
                 html = createTable2(dir, exp, audio, script);
                 // console.log(html)
@@ -427,7 +434,7 @@
       </div>
     </section>
         
-    <section class="page-section bg-primary text-white mb-0" id="seen_emotion_intensity">
+    <section class="page-section bg-info text-white mb-0" id="emotion_intensity">
       <div class="container">
         <!-- About Section Heading-->
         <div class="text-center">
@@ -487,7 +494,7 @@
       </div>
     </section>
         
-    <section class="page-section bg-primary text-white mb-0" id="unseen_emotion_intensity">
+    <section class="page-section bg-primary text-white mb-0" id="emotion_intensity">
       <div class="container">
         <!-- About Section Heading-->
         <div class="text-center">
@@ -502,7 +509,7 @@
         </div>
 
         <div class="row">
-          <div id="div4" class="col-lg-auto ml-auto">
+          <div id="div5" class="col-lg-auto ml-auto">
             <script>
               dir = "./wavs/Intensity_control_unseen";
               exp = {
@@ -529,7 +536,7 @@
                 },
               };
               for (var audio in audios) {
-                div = document.getElementById("div4");
+                div = document.getElementById("div5");
                 script = audios[audio];
                 html = createTable3(dir, exp, audio, script);
                 // console.log(html)
@@ -562,7 +569,7 @@
         </div>
 
         <div class="row">
-          <div id="div3" class="col-lg-auto ml-auto">
+          <div id="div6" class="col-lg-auto ml-auto">
             <script>
               dir = "./wavs/Style_shift";
               exp = {
@@ -574,17 +581,11 @@
                 "Style Shift (Strong)": "Style_shift_s",
               };
               audios = {
-                "0014_001077": {
+                "0019_001077": {
                   emotion: "Sad",
-                  speaker: "Seen Speaker",
-                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
+                  speaker: "Unseen Speaker",
+                  style: "-Valence, -Arousal, +Dominance → +Valence, -Arousal, -Dominance",
                   script: "Monster made a deep bow.",
-                },
-                "0014_001089": {
-                  emotion: "Sad",
-                  speaker: "Seen Speaker",
-                  style: "+Valence, -Arousal, -Dominance → -Valence, -Arousal, +Dominance",
-                  script: "Our thanks to gods oath.",
                 },
                 "0013_001092": {
                   emotion: "Sad",
@@ -592,15 +593,21 @@
                   style: "+Valence, +Arousal, -Dominance → -Valence, -Arousal, +Dominance",
                   script: "She may mind ye of her.",
                 },
-                "0019_001077": {
+                "0014_001089": {
                   emotion: "Sad",
-                  speaker: "Unseen Speaker",
-                  style: "-Valence, -Arousal, +Dominance → +Valence, -Arousal, -Dominance",
+                  speaker: "Seen Speaker",
+                  style: "+Valence, -Arousal, -Dominance → -Valence, -Arousal, +Dominance",
+                  script: "Our thanks to gods oath.",
+                },
+                "0014_001077": {
+                  emotion: "Sad",
+                  speaker: "Seen Speaker",
+                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
                   script: "Monster made a deep bow.",
                 },
               };
               for (var audio in audios) {
-                div = document.getElementById("div3");
+                div = document.getElementById("div6");
                 script = audios[audio];
                 html = createTable4(dir, exp, audio, script);
                 // console.log(html)
@@ -627,7 +634,7 @@
         </div>
 
         <div class="row">
-          <div id="div4" class="col-lg-auto ml-auto">
+          <div id="div7" class="col-lg-auto ml-auto">
             <script>
               dir = "./wavs/Ablation_transformation";
               exp = {
@@ -657,7 +664,7 @@
                 },
               };
               for (var audio in audios) {
-                div = document.getElementById("div4");
+                div = document.getElementById("div7");
                 script = audios[audio];
                 html = createTable5(dir, exp, audio, script);
                 // console.log(html)
