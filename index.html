@@ -22,7 +22,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>EmoSphere-TTS Demo</title>
+    <title>EmoSphere++ Demo</title>
     <!-- Font Awesome icons (free version)-->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
@@ -48,32 +48,67 @@
         html += '<div class="text-left">Script : <i>';
         html += script["script"];
         html += "</i></div></th></tr></thead><tbody><tr>";
-        for (var key in exp) {
-          if (idx % 3 == 0) {
-            html += "<tr>";
+          for (var key in exp) {
+            if (idx === 1 || idx === 4 || idx === 10) {
+              html += "<tr>";
+            }
+          
+            html += '<td style="vertical-align: top;"><p></p>';
+            html += key;
+          
+            html += '<div class="text-center"><audio controls="controls"><source src=';
+            f = dir + "/" + exp[key] + "/" + audio + ".wav";
+            html += f;
+            html += ' type="audio/wav" /></audio></div></td>';
+          
+            idx += 1;
+          
+            if (idx === 3 || idx === 9 || idx === 12) {
+              html += "</tr>";
+            }
           }
-          html += '<td style="vertical-align: top;"><p></p>';
-          html += key;
-          // html +="<p><em>ASR: "
-          // html +=script[exp[key]]
-          // html +="</em></p>"
-          html +=
-            '<div class="text-center"><audio controls="controls"><source src=';
-          f = dir + "/" + exp[key] + "/" + audio + ".wav";
-          html += f;
-          html += ' type="audio/wav" /></audio></div></td>';
-          idx += 1;
-          if (idx % 3 == 0) {
-            html += "</tr>";
-          }
-        }
         html += "</tr></tbody></table>";
         return html;
       }
     </script>
 
     <script>
-      function createTable2(dir, exp, audio, script, idx = 0) {
+      function createTable2(dir, exp, audio, script, idx = 1) {
+        html =
+          '<table class="table table-responsive align-content-center" style="background-color: white; border-radius: 20px">';
+        html += '<thead><tr><th colspan="5" style="width: 40%">';
+        html += '<div class="text-left">Emotion : <i>';
+        html += script["emotion"];
+        html += '</i></div>'; 
+        html += '<div class="text-left">Script : <i>';
+        html += script["script"];
+        html += "</i></div></th></tr></thead><tbody><tr>";
+          for (var key in exp) {
+            if (idx === 1 || idx === 4 || idx === 8) {
+              html += "<tr>";
+            }
+          
+            html += '<td style="vertical-align: top;"><p></p>';
+            html += key;
+          
+            html += '<div class="text-center"><audio controls="controls"><source src=';
+            f = dir + "/" + exp[key] + "/" + audio + ".wav";
+            html += f;
+            html += ' type="audio/wav" /></audio></div></td>';
+          
+            idx += 1;
+          
+            if (idx === 3 || idx === 7 || idx === 10) {
+              html += "</tr>";
+            }
+          }
+        html += "</tr></tbody></table>";
+        return html;
+      }
+    </script>
+
+    <script>
+      function createTable3(dir, exp, audio, script, idx = 0) {
         html =
           '<table class="table table-responsive align-content-center" style="background-color: white; border-radius: 20px">';
   
@@ -114,11 +149,55 @@
     </script>
 
     <script>
-      function createTable3(dir, exp, audio, script, idx = 0) {
+      function createTable5(dir, exp, audio, script, idx = 0) {
         html =
           '<table class="table table-responsive align-content-center" style="background-color: white; border-radius: 20px">';
   
         html += '<thead><tr><th colspan="5" style="width: 40%">';
+        html += '<div class="text-left">Emotion : <i>';
+        html += script["emotion"];
+        html += '</i></div>'; 
+        html += '<div class="text-left">Script : <i>';
+        html += script["script"];
+        html += "</i></div>";
+
+        // 선을 추가하고 이미지를 포함하는 div 추가
+        html += '</th></tr></thead><tbody><tr>'; // 여기서 적절하게 닫는 태그 추가
+        html += '<tr><td colspan="5">'; // 새로운 row를 추가하여 선과 이미지를 포함시킴
+        html += '<div style="text-align: center;">'; // 이미지를 중앙 정렬하기 위한 div
+        html += '<img src="./' + audio + '_ver2.png" style="width: 95%; height: auto; display: block; margin-left: 60px"'; // 이미지 추가
+        html += '</div>'; // 이미지를 포함하는 div 닫기
+        html += '</td></tr>'; // 선과 이미지를 포함하는 row 닫기
+        for (var key in exp) {
+          if (idx % 3 == 0) {
+            html += "<tr>";
+          }
+          html += '<td style="vertical-align: top;"><p></p>';
+          html += key;
+          html +=
+            '<div class="text-center"><audio controls="controls"><source src=';
+          f = dir + "/" + exp[key] + "/" + audio + ".wav";
+          html += f;
+          html += ' type="audio/wav" /></audio></div></td>';
+          idx += 1;
+          if (idx % 3 == 0) {
+            html += "</tr>";
+          }
+        }
+        html += "</tr></tbody></table>";
+        return html;
+      }
+    </script>
+
+    <script>
+      function createTable4(dir, exp, audio, script, idx = 0) {
+        html =
+          '<table class="table table-responsive align-content-center" style="background-color: white; border-radius: 20px">';
+  
+        html += '<thead><tr><th colspan="5" style="width: 40%">';
+        html += '<div class="text-left">Speaker : <i>';
+        html += script["speaker"];
+        html += '</i></div>'; 
         html += '<div class="text-left">Emotion : <i>';
         html += script["emotion"];
         html += '</i></div>'; 
@@ -162,7 +241,7 @@
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top"
-          >EmoSphere-TTS</a
+          >EmoSphere++</a
         >
         <button
           class="navbar-toggler navbar-toggler-right font-weight-bold bg-primary text-white rounded"
@@ -178,9 +257,12 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#abstract">Abstract</a>
-            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#emotional_TTS_qualitty">Emotional TTS<br />Quality</a></li>
-            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#emotion_intensity">Emotion Intensity<br />Controllability</a></li>
+            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#seen_sytle_transfer">Seen Non-Parallel<br />Style Transfer</a></li>
+            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#unseen_sytle_transfer">Unseen Non-Parallel<br />Style Transfer</a></li>
+            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#seen_emotion_intensity">Seen Speaker<br />Emotion Intensity Controllability</a></li>
+            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#unseen_emotion_intensity">Unseen Speaker<br />Emotion Intensity Controllability</a></li>
             <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#emotion_style_shift">Emotion Style<br />Shift</a></li>
+            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#ablation_study">Ablation<br />Study</a></li>
           </ul>
         </div>
       </div>
@@ -191,14 +273,14 @@
       <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Heading-->
         <h1 class="masthead-heading mb-0">
-          EmoSphere-TTS: Emotional Style and Intensity Modeling via Spherical Emotion Vector for Controllable Emotional Text-to-Speech
+          EmoSphere++: Emotion-Controllable Zero-Shot Text-to-Speech via Emotion-Adaptive Spherical Vector
         </h1>
         <!-- Masthead Subheading-->
-        <!-- <p
+        <p
           class="pre-wrap masthead-subheading font-weight-light mb-0 font-italic"
         >
-          Hyung-Seok Oh, Sang-Hoon Lee and Seong-Whan Lee
-        </p> -->
+          Deok-Hyeon Cho, Hyung-Seok Oh, Seung-Bin Kim and Seong-Whan Lee
+        </p>
       </div>
     </header>
 
@@ -219,28 +301,28 @@
         <div class="row justify-content-center">
           <div class="col-lg-12 ml-auto">
             <p class="legend lead">
-              Despite rapid advances in the field of emotional text-to-speech (TTS), recent studies primarily focus on mimicking the average style of a particular emotion. As a result, the ability to manipulate speech emotion remains constrained to several predefined labels, compromising the ability to reflect the nuanced variations of emotion. In this paper, we propose EmoSphere-TTS, which synthesizes expressive emotional speech by using a spherical emotion vector to control the emotional style and intensity of the synthetic speech. Without any human annotation, we use the arousal, valence, and dominance pseudo-labels to model the complex nature of emotion via a Cartesian-spherical transformation. Furthermore, we propose a dual conditional adversarial network to improve the quality of generated speech by reflecting the multi-aspect characteristics. The experimental results demonstrate the model’s ability to control emotional style and intensity with high-quality expressive speech.
+              Emotional text-to-speech (TTS) technology has achieved significant progress in recent years; however, challenges remain owing to the inherent complexity of emotions and limitations of the available emotional speech datasets and models. Previous studies typically relied on limited emotional speech datasets or required extensive manual annotations, restricting their ability to generalize across different speakers and emotional styles. In this paper, we present EmoSphere++, an emotion-controllable zero-shot TTS model that can control emotional style and intensity to resemble natural human speech. We introduce a novel emotion-adaptive spherical vector that models emotional style and intensity without human annotation. Moreover, we propose a multi-level style encoder that can ensure effective generalization for both seen and unseen speakers. We also introduce additional loss functions to enhance the emotion transfer performance for zero-shot scenarios. We employ a conditional flow matching-based decoder to achieve high-quality and expressive emotional TTS in a few sampling steps. Experimental results demonstrate the effectiveness of the proposed framework.
             </p>
             <br />
             <br />
           </div>
-          <div class="text-center">
+          <!-- <div class="text-center">
             <br />
             <img width="90%" src="./model_overview.png" />
             <br />
             <em>Overall framework of EmoSphere-TTS</em> 
             <br />
-          </div>
+          </div> -->
         </div>
       </div>
     </section>
 
-    <section class="page-section bg-info text-white mb-0" id="emotional_TTS_qualitty">
+    <section class="page-section bg-info text-white mb-0" id="seen_sytle_transfer">
       <div class="container">
         <!-- About Section Heading-->
         <div class="text-center">
           <h2 class="page-section-heading d-inline-block text-white">
-            Emotional TTS Quality
+            Seen Non-Parallel Style Transfer
           </h2>
         </div>
         <div class="text-center" style="text-align: center">
@@ -253,37 +335,29 @@
         <div class="row">
           <div id="div2" class="col-lg-auto ml-auto">
             <script>
-              dir = "./wavs/Emotional_TTS_Quality";
+              dir = "./wavs/Seen_non-parallel";
               exp = {
                 "GT": "gt",
                 "BigVGAN": "vocoded",
-                "FastSpeech 2 w/ Emotion Label": "FastSpeech2",
-                "FastSpeech 2 w/ Relative Attribute": "Relative",
-                "FastSpeech 2 w/ Scaling Factor": "Scaling",
-                "EmoSphere-TTS (Proposed)": "EmoSphere",
-                "w/o Spherical Emotion Vector": "EmoSphere_ESVx",
-                "w/o Dual Conditional Discriminator": "EmoSphere_DCDx",
+                "Reference": "reference",
+                "Mellotron": "Mellotron",
+                "Mixedemotion": "Mixedemotion",
+                "YourTTS": "YourTTS",
+                "Generspeech": "Generspeech",
+                "iEmoTTS": "iEmoTTS",
+                "EmoSphere++ (proposed)": "EmoSphere",
+                "w/o Disentangling Module": "wo_Ort",
+                "w/o Orthogonality Loss": "w_Ort",
+                "w/o Vector Quantization": "w_VQ",
               };
               audios = {
-                "0011_001445": {
-                  emotion: "Surprise",
-                  script: "The nastiest things they saw were the cobwebs.",
-                },
-                "0013_000725": {
+                "0015_000725": {
                   emotion: "Happy",
                   script: "She is now choosing skirt to wear.",
                 },
-                "0020_001093": {
+                "0015_001083": {
                   emotion: "Sad",
-                  script: "Story twenty nine a boy and a monkey.",
-                },
-                "0015_000392": {
-                  emotion: "Angry",
-                  script: "She may mind ye of her.",
-                },
-                "0015_000041": {
-                  emotion: "Neutral",
-                  script: "I chose the right way.",
+                  script: "This used to be jerrys occupation.",
                 },
               };
               for (var audio in audios) {
@@ -300,12 +374,65 @@
     </section>
 
     
-    <section class="page-section bg-primary text-white mb-0" id="emotion_intensity">
+    <section class="page-section bg-primary text-white mb-0" id="unseen_sytle_transfer">
       <div class="container">
         <!-- About Section Heading-->
         <div class="text-center">
           <h2 class="page-section-heading d-inline-block text-white">
-            Emotion Intensity Controllability
+            Unseen Non-Parallel Style Transfer
+          </h2>
+        </div>
+
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+          <div class="divider-custom"></div>
+        </div>
+
+        <div class="row">
+          <div id="div4" class="col-lg-auto ml-auto">
+            <script>
+              dir = "./wavs/Unseen_non-parallel";
+              exp = {
+                "GT": "gt",
+                "BigVGAN": "vocoded",
+                "Reference": "reference",
+                "YourTTS": "YourTTS",
+                "Generspeech": "Generspeech",
+                "iEmoTTS": "iEmoTTS",
+                "EmoSphere++ (proposed)": "EmoSphere",
+                "w/o Disentangling Module": "wo_Ort",
+                "w/o Orthogonality Loss": "w_Ort",
+                "w/o Vector Quantization": "w_VQ",
+              };
+              audios = {
+                "0013_000733": {
+                  emotion: "Happy",
+                  script: "This used to be jerrys occupation.",
+                },
+                "0013_001075": {
+                  emotion: "Sad",
+                  script: "She is now choosing skirt to wear.",
+                },
+              };
+              for (var audio in audios) {
+                div = document.getElementById("div4");
+                script = audios[audio];
+                html = createTable2(dir, exp, audio, script);
+                // console.log(html)
+                div.insertAdjacentHTML("afterend", html);
+              }
+            </script>
+          </div>
+        </div>
+      </div>
+    </section>
+        
+    <section class="page-section bg-primary text-white mb-0" id="seen_emotion_intensity">
+      <div class="container">
+        <!-- About Section Heading-->
+        <div class="text-center">
+          <h2 class="page-section-heading d-inline-block text-white">
+            Seen Speaker Emotion Intensity Controllability
           </h2>
         </div>
 
@@ -319,38 +446,92 @@
             <script>
               dir = "./wavs/Intensity_control";
               exp = {
-                "Relative Attribute (Weak)": "Relative_w",
-                "Relative Attribute (Medium)": "Relative_m",
-                "Relative Attribute (Strong)": "Relative_s",
-                "Scaling Factor (Weak)": "Scaling_w",
-                "Scaling Factor (Medium)": "Scaling_m",
-                "Scaling Factor (Strong)": "Scaling_s",
-                "EmoSphere-TTS (Weak)": "EmoSphere-TTS_w",
-                "EmoSphere-TTS (Medium)": "EmoSphere-TTS_m",
-                "EmoSphere-TTS (Strong)": "EmoSphere-TTS_s",
+                "MatchaTTS w/ Relative Attribute (Weak)": "Relative_w",
+                "MatchaTTS w/ Relative Attribute (Medium)": "Relative_m",
+                "MatchaTTS w/ Relative Attribute (Strong)": "Relative_s",
+                "MatchaTTS w/ Scaling Factor (Weak)": "Scaling_w",
+                "MatchaTTS w/ Scaling Factor (Medium)": "Scaling_m",
+                "MatchaTTS w/ Scaling Factor (Strong)": "Scaling_s",
+                "EmoSphere++ (Weak)": "EmoSphere_w",
+                "EmoSphere++ (Medium)": "EmoSphere_m",
+                "EmoSphere++ (Strong)": "EmoSphere_s",
               };
               audios = {
-                "0011_001429": {
+                "0015_001433": {
                   emotion: "Surprise",
-                  script: "The nastiest things they saw were the cobwebs.",
+                  script: "This used to be jerrys occupation.",
                 },
-                "0011_000721": {
+                "0011_000746": {
                   emotion: "Happy",
-                  script: "She is now choosing skirt to wear.",
+                  script: "They never know id regular ran away.",
                 },
-                "0017_001089": {
+                "0018_001083": {
                   emotion: "Sad",
-                  script: "Story twenty nine a boy and a monkey.",
+                  script: "This used to be jerrys occupation.",
                 },
-                "0015_000389": {
+                "0012_000372": {
                   emotion: "Angry",
-                  script: "She may mind ye of her.",
+                  script: "And what are doves. and what are doves.",
                 },
               };
               for (var audio in audios) {
                 div = document.getElementById("div4");
                 script = audios[audio];
-                html = createTable2(dir, exp, audio, script);
+                html = createTable3(dir, exp, audio, script);
+                // console.log(html)
+                div.insertAdjacentHTML("afterend", html);
+              }
+            </script>
+          </div>
+        </div>
+      </div>
+    </section>
+        
+    <section class="page-section bg-primary text-white mb-0" id="unseen_emotion_intensity">
+      <div class="container">
+        <!-- About Section Heading-->
+        <div class="text-center">
+          <h2 class="page-section-heading d-inline-block text-white">
+            Unseen Speaker Emotion Intensity Controllability
+          </h2>
+        </div>
+
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+          <div class="divider-custom"></div>
+        </div>
+
+        <div class="row">
+          <div id="div4" class="col-lg-auto ml-auto">
+            <script>
+              dir = "./wavs/Intensity_control_unseen";
+              exp = {
+                "EmoSphere++ (Weak)": "EmoSphere_w",
+                "EmoSphere++ (Medium)": "EmoSphere_m",
+                "EmoSphere++ (Strong)": "EmoSphere_s",
+              };
+              audios = {
+                "0019_001442": {
+                  emotion: "Surprise",
+                  script: "She may mind ye of her.",
+                },
+                "0019_000744": {
+                  emotion: "Happy",
+                  script: "Take courage all isnt lost yet.",
+                },
+                "0013_001076": {
+                  emotion: "Sad",
+                  script: "Lets make the noise a snake.",
+                },
+                "0013_000376": {
+                  emotion: "Angry",
+                  script: "Lets make the noise a snake.",
+                },
+              };
+              for (var audio in audios) {
+                div = document.getElementById("div4");
+                script = audios[audio];
+                html = createTable3(dir, exp, audio, script);
                 // console.log(html)
                 div.insertAdjacentHTML("afterend", html);
               }
@@ -393,51 +574,35 @@
                 "Style Shift (Strong)": "Style_shift_s",
               };
               audios = {
-                "0013_001421": {
-                  emotion: "Surprise",
-                  style: "+Valence, +Arousal, +Dominance → +Valence, +Arousal, -Dominance",
-                  script: "As rich as peters son in law!",
+                "0014_001077": {
+                  emotion: "Sad",
+                  speaker: "Seen Speaker",
+                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
+                  script: "Monster made a deep bow.",
                 },
-                "0012_001449": {
-                  emotion: "Surprise",
-                  style: "+Valence, +Arousal, +Dominance → +Valence, +Arousal, -Dominance",
-                  script: "Then we all say aha!",
+                "0014_001089": {
+                  emotion: "Sad",
+                  speaker: "Seen Speaker",
+                  style: "+Valence, -Arousal, -Dominance → -Valence, -Arousal, +Dominance",
+                  script: "Our thanks to gods oath.",
                 },
-                "0018_000744": {
-                  emotion: "Happy",
-                  style: "+Valence, +Arousal, +Dominance → -Valence, -Arousal, -Dominance",
-                  script: "Take courage all isn't lost yet.",
-                },
-                "0013_000744": {
-                  emotion: "Happy",
+                "0013_001092": {
+                  emotion: "Sad",
+                  speaker: "Unseen Speaker",
                   style: "+Valence, +Arousal, -Dominance → -Valence, -Arousal, +Dominance",
-                  script: "Take courage all isn't lost yet.",
+                  script: "She may mind ye of her.",
                 },
-                "0019_001087": {
+                "0019_001077": {
                   emotion: "Sad",
-                  style: "+Valence, +Arousal, +Dominance → +Valence, -Arousal, -Dominance",
-                  script: "I think it'll encourage me.",
-                },
-                "0013_001099": {
-                  emotion: "Sad",
-                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
-                  script: "Then we all say aha!",
-                },
-                "0017_000376": {
-                  emotion: "Angry",
-                  style: "+Valence, +Arousal, -Dominance → -Valence, -Arousal, -Dominance",
-                  script: "Let's make the noise a snake.",
-                },
-                "0014_000388": {
-                  emotion: "Angry",
-                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
-                  script: "Hold up my chin, slow and solid.",
+                  speaker: "Unseen Speaker",
+                  style: "-Valence, -Arousal, +Dominance → +Valence, -Arousal, -Dominance",
+                  script: "Monster made a deep bow.",
                 },
               };
               for (var audio in audios) {
                 div = document.getElementById("div3");
                 script = audios[audio];
-                html = createTable3(dir, exp, audio, script);
+                html = createTable4(dir, exp, audio, script);
                 // console.log(html)
                 div.insertAdjacentHTML("afterend", html);
               }
@@ -446,6 +611,64 @@
         </div>
       </div>
     </section>
+
+    <section class="page-section bg-primary text-white mb-0" id="ablation_study">
+      <div class="container">
+        <!-- About Section Heading-->
+        <div class="text-center">
+          <h2 class="page-section-heading d-inline-block text-white">
+            Comparison of Coordinate Transformation
+          </h2>
+        </div>
+
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+          <div class="divider-custom"></div>
+        </div>
+
+        <div class="row">
+          <div id="div4" class="col-lg-auto ml-auto">
+            <script>
+              dir = "./wavs/Ablation_transformation";
+              exp = {
+                "Emotion-Adaptive Spherical Vector (Weak)": "EASV_w",
+                "Emotion-Adaptive Spherical Vector (Medium)": "EASV_m",
+                "Emotion-Adaptive Spherical Vector (Strong)": "EASV_s",
+                "Spherical Emotion Vector (Weak)": "SEV_w",
+                "Spherical Emotion Vector (Medium)": "SEV_m",
+                "Spherical Emotion Vector (Strong)": "SEV_s",
+              };
+              audios = {
+                "0015_001433": {
+                  emotion: "Surprise",
+                  script: "This used to be jerrys occupation.",
+                },
+                "0011_000746": {
+                  emotion: "Happy",
+                  script: "They never know id regular ran away.",
+                },
+                "0018_001083": {
+                  emotion: "Sad",
+                  script: "This used to be jerrys occupation.",
+                },
+                "0012_000372": {
+                  emotion: "Angry",
+                  script: "And what are doves. and what are doves.",
+                },
+              };
+              for (var audio in audios) {
+                div = document.getElementById("div4");
+                script = audios[audio];
+                html = createTable5(dir, exp, audio, script);
+                // console.log(html)
+                div.insertAdjacentHTML("afterend", html);
+              }
+            </script>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
     <div class="scroll-to-top d-lg-none position-fixed">
       <a
