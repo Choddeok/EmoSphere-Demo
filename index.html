@@ -49,7 +49,7 @@
         html += script["script"];
         html += "</i></div></th></tr></thead><tbody><tr>";
           for (var key in exp) {
-            if (idx === 1 || idx === 4 || idx === 7 || idx === 9) {
+            if (idx === 1 || idx === 4 || idx === 7 || idx === 9 || idx === 10 || idx === 13) {
               html += "<tr>";
             }
           
@@ -68,7 +68,7 @@
           
             idx += 1;
           
-            if (idx === 4 || idx === 7 || idx === 9 || idx === 13) {
+            if (idx === 4 || idx === 7 || idx === 9 || idx === 10 || idx === 13 || idx === 16) {
               html += "</tr>";
             }
           }
@@ -89,7 +89,7 @@
         html += script["script"];
         html += "</i></div></th></tr></thead><tbody><tr>";
           for (var key in exp) {
-            if (idx === 1 || idx === 4 || idx === 7) {
+            if (idx === 1 || idx === 4 || idx === 7 || idx === 8 || idx === 11 || idx === 14) {
               html += "<tr>";
             }
           
@@ -107,7 +107,7 @@
           
             idx += 1;
           
-            if (idx === 4 || idx === 7 || idx === 11) {
+            if (idx === 4 || idx === 7 || idx === 8 || idx === 11 || idx === 14 || idx === 16) {
               html += "</tr>";
             }
           }
@@ -117,142 +117,188 @@
     </script>
 
     <script>
-      function createTable3(dir, exp, audio, script, idx = 0) {
-        html =
-          '<table class="table table-responsive align-content-center" style="background-color: white; border-radius: 20px">';
-  
+      function createTable3(dir, exp, audio, script) {
+        let html = '<table class="table table-responsive align-content-center" style="background-color: white; border-radius: 20px">';
+        
+        // 헤더 부분
         html += '<thead><tr><th colspan="5" style="width: 40%">';
-        html += '<div class="text-left">Emotion : <i>';
-        html += script["emotion"];
-        html += '</i></div>'; 
-        html += '<div class="text-left">Script : <i>';
-        html += script["script"];
-        html += "</i></div>";
-
-        // 선을 추가하고 이미지를 포함하는 div 추가
-        html += '</th></tr></thead><tbody><tr>'; // 여기서 적절하게 닫는 태그 추가
-        html += '<tr><td colspan="5">'; // 새로운 row를 추가하여 선과 이미지를 포함시킴
-        html += '<div style="text-align: center;">'; // 이미지를 중앙 정렬하기 위한 div
-        html += '<img src="./' + audio + '.png" style="width: 95%; height: auto; display: block; margin-left: 60px"'; // 이미지 추가
-        html += '</div>'; // 이미지를 포함하는 div 닫기
-        html += '</td></tr>'; // 선과 이미지를 포함하는 row 닫기
+        html += '<div class="text-left">Emotion : <i>' + script["emotion"] + '</i></div>';
+        html += '<div class="text-left">Script : <i>' + script["script"] + '</i></div>';
+        html += '</th></tr></thead><tbody>';
+        
+        // 이미지 행 추가
+        html += '<tr><td colspan="5">';
+        html += '<div style="text-align: center;">';
+        html += '<img src="./' + audio + '.png" style="width: 95%; height: auto; display: block; margin-left: 60px" />';
+        html += '</div>';
+        html += '</td></tr>';
+        
+        html += '<tr>';
+        let gtSrc = dir + "/GT/" + audio + ".wav";
+        html += '<td style="vertical-align: top;"><p>GT</p>';
+        html += '<div class="text-center"><audio controls="controls"><source src="' + gtSrc + '" type="audio/wav" /></audio></div>';
+        html += '</td>';
+        
+        let bigVganSrc = dir + "/BigVGAN/" + audio + ".wav";
+        html += '<td style="vertical-align: top;"><p>BigVGAN</p>';
+        html += '<div class="text-center"><audio controls="controls"><source src="' + bigVganSrc + '" type="audio/wav" /></audio></div>';
+        html += '</td>';
+        html += '</tr>';
+        
+        // exp 항목들을 3개씩 한 행에 추가
+        let idx = 0;
+        let rowStarted = false;
         for (var key in exp) {
-          if (idx % 3 == 0) {
+          if (idx % 3 === 0) {
             html += "<tr>";
+            rowStarted = true;
           }
+          
           html += '<td style="vertical-align: top;"><p></p>';
           if (key === "EmoSphere++ (Weak)" || key === "EmoSphere++ (Medium)" || key === "EmoSphere++ (Strong)") {
             html += '<strong>' + key + '</strong>';
           } else {
             html += key;
           }
-
-
-          html +=
-            '<div class="text-center"><audio controls="controls"><source src=';
-          f = dir + "/" + exp[key] + "/" + audio + ".wav";
-          html += f;
-          html += ' type="audio/wav" /></audio></div></td>';
-          idx += 1;
-          if (idx % 3 == 0) {
+          
+          let src = dir + "/" + exp[key] + "/" + audio + ".wav";
+          html += '<div class="text-center"><audio controls="controls"><source src="' + src + '" type="audio/wav" /></audio></div>';
+          html += '</td>';
+          idx++;
+          
+          if (idx % 3 === 0) {
             html += "</tr>";
+            rowStarted = false;
           }
         }
-        html += "</tr></tbody></table>";
+        if (rowStarted) {
+          html += "</tr>";
+        }
+        
+        html += "</tbody></table>";
         return html;
       }
+      
     </script>
 
     <script>
       function createTable5(dir, exp, audio, script, idx = 0) {
-        html =
-          '<table class="table table-responsive align-content-center" style="background-color: white; border-radius: 20px">';
-  
+        let html = '<table class="table table-responsive align-content-center" style="background-color: white; border-radius: 20px">';
+        
+        // 헤더 부분
         html += '<thead><tr><th colspan="5" style="width: 40%">';
-        html += '<div class="text-left">Emotion : <i>';
-        html += script["emotion"];
-        html += '</i></div>'; 
-        html += '<div class="text-left">Script : <i>';
-        html += script["script"];
-        html += "</i></div>";
-
-        // 선을 추가하고 이미지를 포함하는 div 추가
-        html += '</th></tr></thead><tbody><tr>'; // 여기서 적절하게 닫는 태그 추가
-        html += '<tr><td colspan="5">'; // 새로운 row를 추가하여 선과 이미지를 포함시킴
-        html += '<div style="text-align: center;">'; // 이미지를 중앙 정렬하기 위한 div
-        html += '<img src="./' + audio + '.png" style="width: 95%; height: auto; display: block; margin-left: 60px"'; // 이미지 추가
-        html += '</div>'; // 이미지를 포함하는 div 닫기
-        html += '</td></tr>'; // 선과 이미지를 포함하는 row 닫기
+        html += '<div class="text-left">Emotion : <i>' + script["emotion"] + '</i></div>';
+        html += '<div class="text-left">Script : <i>' + script["script"] + '</i></div>';
+        html += '</th></tr></thead><tbody>';
+        
+        // 이미지 row 추가
+        html += '<tr><td colspan="5">';
+        html += '<div style="text-align: center;">';
+        html += '<img src="./' + audio + '.png" style="width: 95%; height: auto; display: block; margin-left: 60px" />';
+        html += '</div>';
+        html += '</td></tr>';
+        
+        html += '<tr>';
+        let gtSrc = dir + "/GT/" + audio + ".wav";
+        html += '<td style="vertical-align: top;"><p>GT</p>';
+        html += '<div class="text-center"><audio controls="controls"><source src="' + gtSrc + '" type="audio/wav" /></audio></div>';
+        html += '</td>';
+        
+        let bigVganSrc = dir + "/BigVGAN/" + audio + ".wav";
+        html += '<td style="vertical-align: top;"><p>BigVGAN</p>';
+        html += '<div class="text-center"><audio controls="controls"><source src="' + bigVganSrc + '" type="audio/wav" /></audio></div>';
+        html += '</td>';
+        html += '</tr>';
+        
+        // exp 항목들을 3개씩 한 행에 추가
+        let rowStarted = false;
         for (var key in exp) {
-          if (idx % 3 == 0) {
+          if (idx % 3 === 0) {
             html += "<tr>";
+            rowStarted = true;
           }
+          
           html += '<td style="vertical-align: top;"><p></p>';
-          if (key === "Emotion-Adaptive Spherical Vector (Weak)" || key === "Emotion-Adaptive Spherical Vector (Medium)" || key === "Emotion-Adaptive Spherical Vector (Strong)") {
+          if (key === "Emotion-Adaptive Spherical Vector (Weak)" ||
+              key === "Emotion-Adaptive Spherical Vector (Medium)" ||
+              key === "Emotion-Adaptive Spherical Vector (Strong)") {
             html += '<strong>' + key + '</strong>';
           } else {
             html += key;
           }
-          html +=
-            '<div class="text-center"><audio controls="controls"><source src=';
-          f = dir + "/" + exp[key] + "/" + audio + ".wav";
-          html += f;
-          html += ' type="audio/wav" /></audio></div></td>';
-          idx += 1;
-          if (idx % 3 == 0) {
+          let src = dir + "/" + exp[key] + "/" + audio + ".wav";
+          html += '<div class="text-center"><audio controls="controls"><source src="' + src + '" type="audio/wav" /></audio></div></td>';
+          
+          idx++;
+          if (idx % 3 === 0) {
             html += "</tr>";
+            rowStarted = false;
           }
         }
-        html += "</tr></tbody></table>";
+        if (rowStarted) {
+          html += "</tr>";
+        }
+        
+        html += "</tbody></table>";
         return html;
       }
+      
     </script>
 
     <script>
       function createTable4(dir, exp, audio, script, idx = 0) {
-        html =
-          '<table class="table table-responsive align-content-center" style="background-color: white; border-radius: 20px">';
-  
+        let html = '<table class="table table-responsive align-content-center" style="background-color: white; border-radius: 20px">';
+      
+        // 헤더 부분
         html += '<thead><tr><th colspan="5" style="width: 40%">';
-        html += '<div class="text-left">Speaker : <i>';
-        html += script["speaker"];
-        html += '</i></div>'; 
-        html += '<div class="text-left">Emotion : <i>';
-        html += script["emotion"];
-        html += '</i></div>'; 
-        html += '<div class="text-left">Style : <i>';
-        html += script["style"];
-        html += "</i></div>";
-        html += '<div class="text-left">Script : <i>';
-        html += script["script"];
-        html += "</i></div>";
-
-        // 선을 추가하고 이미지를 포함하는 div 추가
-        html += '</th></tr></thead><tbody><tr>'; // 여기서 적절하게 닫는 태그 추가
-        html += '<tr><td colspan="5">'; // 새로운 row를 추가하여 선과 이미지를 포함시킴
-        html += '<div style="text-align: center;">'; // 이미지를 중앙 정렬하기 위한 div
-        html += '<img src="./' + audio + '.png" style="width: 70%; height: auto; display: block; margin-left: 220px"'; // 이미지 추가
-        html += '</div>'; // 이미지를 포함하는 div 닫기
-        html += '</td></tr>'; // 선과 이미지를 포함하는 row 닫기
+        html += '<div class="text-left">Speaker : <i>' + script["speaker"] + '</i></div>';
+        html += '<div class="text-left">Emotion : <i>' + script["emotion"] + '</i></div>';
+        html += '<div class="text-left">Style : <i>' + script["style"] + '</i></div>';
+        html += '<div class="text-left">Script : <i>' + script["script"] + '</i></div>';
+        html += '</th></tr></thead><tbody>';
+      
+        // 이미지 row 추가
+        html += '<tr><td colspan="5">';
+        html += '<div style="text-align: center;">';
+        html += '<img src="./' + audio + '.png" style="width: 70%; height: auto; display: block; margin-left: 220px" />';
+        html += '</div>';
+        html += '</td></tr>';
+        
+        html += '<tr>';
+        let gtSrc = dir + "/GT/" + audio + ".wav";
+        html += '<td style="vertical-align: top;"><p>GT</p>';
+        html += '<div class="text-center"><audio controls="controls"><source src="' + gtSrc + '" type="audio/wav" /></audio></div>';
+        html += '</td>';
+        
+        let bigVganSrc = dir + "/BigVGAN/" + audio + ".wav";
+        html += '<td style="vertical-align: top;"><p>BigVGAN</p>';
+        html += '<div class="text-center"><audio controls="controls"><source src="' + bigVganSrc + '" type="audio/wav" /></audio></div>';
+        html += '</td>';
+        html += '</tr>';
+      
+        // exp 항목들을 3개씩 한 행에 추가
+        let rowStarted = false;
         for (var key in exp) {
-          if (idx % 3 == 0) {
+          if (idx % 3 === 0) {
             html += "<tr>";
+            rowStarted = true;
           }
-          html += '<td style="vertical-align: top;"><p></p>';
-          html += key;
-          html +=
-            '<div class="text-center"><audio controls="controls"><source src=';
-          f = dir + "/" + exp[key] + "/" + audio + ".wav";
-          html += f;
-          html += ' type="audio/wav" /></audio></div></td>';
-          idx += 1;
-          if (idx % 3 == 0) {
+          html += '<td style="vertical-align: top;"><p></p>' + key;
+          html += '<div class="text-center"><audio controls="controls"><source src="' + dir + "/" + exp[key] + "/" + audio + '.wav" type="audio/wav" /></audio></div></td>';
+          idx++;
+          if (idx % 3 === 0) {
             html += "</tr>";
+            rowStarted = false;
           }
         }
-        html += "</tr></tbody></table>";
+        if (rowStarted) {
+          html += "</tr>";
+        }
+      
+        html += "</tbody></table>";
         return html;
       }
+      
     </script>
 
   </head>
@@ -363,9 +409,12 @@
                 "Generspeech": "Generspeech",
                 "iEmoTTS": "iEmoTTS",
                 "EmoSphere++ (Proposed)": "EmoSphere",
-                "EmoSphere++ w/o Disentangling Module": "wo_Ort",
-                "EmoSphere++ w/ Orthogonality Loss": "w_Ort",
-                "EmoSphere++ w/ Vector Quantization": "w_VQ",
+                "EmoSphere++ w/o Disentangling Method": "wo_Ort",
+                "EmoSphere++ w/o Global Emotion Encoder": "wo_global",
+                "EmoSphere++ w/o Attribute Emotion Encoder": "wo_local",
+                "EmoSphere++ w/ Gradient Reversal Layer [1]": "w_GRL",
+                "EmoSphere++ w/ Vector Quantization [2]": "w_VQ",
+                "EmoSphere++ w/ Orthogonality Loss [2]": "w_Ort",
               };
               audios = {
                 "0015_001083": {
@@ -386,6 +435,12 @@
               }
             </script>
           </div>
+        </div>
+        <div style="text-align: right; font-size: 10px;">
+          <p></p>
+          <p style="margin: 0px 0;">[1] H.-S. Oh et al., “Durflex-evc: Duration-flexible emotional voice conversion leveraging discrete representations without text alignment,” IEEE Trans. Affect. Comput., 2025.</p>
+          <p style="margin: 0px 0;">[2] G. Zhang et al., “iemotts: Toward robust cross-speaker emotion transfer and control for speech synthesis based on disentanglement between prosody and timbre,” IEEE/ACM Trans. Audio, Speech, Lang. Process., vol. 31, pp. 1693–1705, 2023.</p>
+          <p style="margin: 0px 0;">[3] T. Li et al., “Cross-speaker emotion disentangling and transfer for end-to-end speech synthesis,” IEEE/ACM Trans. Audio, Speech, Lang. Process., vol. 30, pp. 1448–1460, 2022.</p>
         </div>
       </div>
     </section>
@@ -417,9 +472,12 @@
                 "Generspeech": "Generspeech",
                 "iEmoTTS": "iEmoTTS",
                 "EmoSphere++ (Proposed)": "EmoSphere",
-                "EmoSphere++ w/o Disentangling Module": "wo_Ort",
-                "EmoSphere++ w/ Orthogonality Loss": "w_Ort",
-                "EmoSphere++ w/ Vector Quantization": "w_VQ",
+                "EmoSphere++ w/o Disentangling Method": "wo_Ort",
+                "EmoSphere++ w/o Global Emotion Encoder": "wo_global",
+                "EmoSphere++ w/o Attribute Emotion Encoder": "wo_local",
+                "EmoSphere++ w/ Gradient Reversal Layer [1]": "w_GRL",
+                "EmoSphere++ w/ Vector Quantization [2]": "w_VQ",
+                "EmoSphere++ w/ Orthogonality Loss [2]": "w_Ort",
               };
               audios = {
                 "0013_000733": {
@@ -440,6 +498,12 @@
               }
             </script>
           </div>
+        </div>
+        <div style="text-align: right; font-size: 10px;">
+          <p></p>
+          <p style="margin: 0px 0;">[1] H.-S. Oh et al., “Durflex-evc: Duration-flexible emotional voice conversion leveraging discrete representations without text alignment,” IEEE Trans. Affect. Comput., 2025.</p>
+          <p style="margin: 0px 0;">[2] G. Zhang et al., “iemotts: Toward robust cross-speaker emotion transfer and control for speech synthesis based on disentanglement between prosody and timbre,” IEEE/ACM Trans. Audio, Speech, Lang. Process., vol. 31, pp. 1693–1705, 2023.</p>
+          <p style="margin: 0px 0;">[3] T. Li et al., “Cross-speaker emotion disentangling and transfer for end-to-end speech synthesis,” IEEE/ACM Trans. Audio, Speech, Lang. Process., vol. 30, pp. 1448–1460, 2022.</p>
         </div>
       </div>
     </section>
@@ -591,6 +655,12 @@
                 "Style Shift (Strong)": "Style_shift_s",
               };
               audios = {
+                "0019_001448": {
+                  emotion: "Surprise",
+                  speaker: "Unseen Speaker",
+                  style: "+Valence, +Arousal, +Dominance → +Valence, +Arousal, -Dominance",
+                  script: "You are not a runaway, who are you?",
+                },
                 "0019_001077": {
                   emotion: "Sad",
                   speaker: "Unseen Speaker",
@@ -603,6 +673,30 @@
                   style: "+Valence, +Arousal, -Dominance → -Valence, -Arousal, +Dominance",
                   script: "She may mind ye of her.",
                 },
+                "0013_000721": {
+                  emotion: "Happy",
+                  speaker: "Unseen Speaker",
+                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
+                  script: "As rich as peters son in law !",
+                },
+                "0019_000377": {
+                  emotion: "Angry",
+                  speaker: "Unseen Speaker",
+                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
+                  script: "Monster made a deep bow .",
+                },
+                "0016_001424": {
+                  emotion: "Surprise ",
+                  speaker: "Seen Speaker",
+                  style: "+Valence, +Arousal, +Dominance → +Valence, +Arousal, -Dominance",
+                  script: "The football teams give a tea party.",
+                },
+                "0014_001424": {
+                  emotion: "Surprise ",
+                  speaker: "Seen Speaker",
+                  style: "+Valence, +Arousal, +Dominance → +Valence, +Arousal, -Dominance",
+                  script: "The football teams give a tea party.",
+                },
                 "0014_001089": {
                   emotion: "Sad",
                   speaker: "Seen Speaker",
@@ -614,6 +708,30 @@
                   speaker: "Seen Speaker",
                   style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
                   script: "Monster made a deep bow.",
+                },
+                "0014_000746": {
+                  emotion: "Happy ",
+                  speaker: "Seen Speaker",
+                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
+                  script: "They never know id regular ran away.",
+                },
+                "0014_000727": {
+                  emotion: "Happy ",
+                  speaker: "Seen Speaker",
+                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
+                  script: "Monster made a deep bow.",
+                },
+                "0014_000374": {
+                  emotion: "Angry",
+                  speaker: "Seen Speaker",
+                  style: "+Valence, +Arousal, +Dominance → -Valence, -Arousal, +Dominance",
+                  script: "The football teams give a tea party.",
+                },
+                "0014_000381": {
+                  emotion: "Angry",
+                  speaker: "Seen Speaker",
+                  style: "+Valence, +Arousal, -Dominance → -Valence, -Arousal, -Dominance",
+                  script: "All smile were real and the happierthe more sincere.",
                 },
               };
               for (var audio in audios) {
