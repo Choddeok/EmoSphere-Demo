@@ -414,7 +414,7 @@
                 "EmoSphere++ w/o Attribute Emotion Encoder": "wo_local",
                 "EmoSphere++ w/ Gradient Reversal Layer [1]": "w_GRL",
                 "EmoSphere++ w/ Vector Quantization [2]": "w_VQ",
-                "EmoSphere++ w/ Orthogonality Loss [2]": "w_Ort",
+                "EmoSphere++ w/ Orthogonality Loss [3]": "w_Ort",
               };
               audios = {
                 "0015_001083": {
@@ -477,7 +477,7 @@
                 "EmoSphere++ w/o Attribute Emotion Encoder": "wo_local",
                 "EmoSphere++ w/ Gradient Reversal Layer [1]": "w_GRL",
                 "EmoSphere++ w/ Vector Quantization [2]": "w_VQ",
-                "EmoSphere++ w/ Orthogonality Loss [2]": "w_Ort",
+                "EmoSphere++ w/ Orthogonality Loss [3]": "w_Ort",
               };
               audios = {
                 "0013_000733": {
@@ -661,18 +661,6 @@
                   style: "+Valence, +Arousal, +Dominance → +Valence, +Arousal, -Dominance",
                   script: "You are not a runaway, who are you?",
                 },
-                "0019_001077": {
-                  emotion: "Sad",
-                  speaker: "Unseen Speaker",
-                  style: "-Valence, -Arousal, +Dominance → +Valence, -Arousal, -Dominance",
-                  script: "Monster made a deep bow.",
-                },
-                "0013_001092": {
-                  emotion: "Sad",
-                  speaker: "Unseen Speaker",
-                  style: "+Valence, +Arousal, -Dominance → -Valence, -Arousal, +Dominance",
-                  script: "She may mind ye of her.",
-                },
                 "0013_000721": {
                   emotion: "Happy",
                   speaker: "Unseen Speaker",
@@ -684,6 +672,18 @@
                   speaker: "Unseen Speaker",
                   style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
                   script: "Monster made a deep bow .",
+                },
+                "0019_001077": {
+                  emotion: "Sad",
+                  speaker: "Unseen Speaker",
+                  style: "-Valence, -Arousal, +Dominance → +Valence, -Arousal, -Dominance",
+                  script: "Monster made a deep bow.",
+                },
+                "0013_001092": {
+                  emotion: "Sad",
+                  speaker: "Unseen Speaker",
+                  style: "+Valence, +Arousal, -Dominance → -Valence, -Arousal, +Dominance",
+                  script: "She may mind ye of her.",
                 },
                 "0016_001424": {
                   emotion: "Surprise ",
@@ -697,30 +697,6 @@
                   style: "+Valence, +Arousal, +Dominance → +Valence, +Arousal, -Dominance",
                   script: "The football teams give a tea party.",
                 },
-                "0014_001089": {
-                  emotion: "Sad",
-                  speaker: "Seen Speaker",
-                  style: "+Valence, -Arousal, -Dominance → -Valence, -Arousal, +Dominance",
-                  script: "Our thanks to gods oath.",
-                },
-                "0014_001077": {
-                  emotion: "Sad",
-                  speaker: "Seen Speaker",
-                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
-                  script: "Monster made a deep bow.",
-                },
-                "0014_000746": {
-                  emotion: "Happy ",
-                  speaker: "Seen Speaker",
-                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
-                  script: "They never know id regular ran away.",
-                },
-                "0014_000727": {
-                  emotion: "Happy ",
-                  speaker: "Seen Speaker",
-                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
-                  script: "Monster made a deep bow.",
-                },
                 "0014_000374": {
                   emotion: "Angry",
                   speaker: "Seen Speaker",
@@ -732,6 +708,30 @@
                   speaker: "Seen Speaker",
                   style: "+Valence, +Arousal, -Dominance → -Valence, -Arousal, -Dominance",
                   script: "All smile were real and the happierthe more sincere.",
+                },
+                "0014_000727": {
+                  emotion: "Happy ",
+                  speaker: "Seen Speaker",
+                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
+                  script: "Monster made a deep bow.",
+                },
+                "0014_000746": {
+                  emotion: "Happy ",
+                  speaker: "Seen Speaker",
+                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
+                  script: "They never know id regular ran away.",
+                },
+                "0014_001089": {
+                  emotion: "Sad",
+                  speaker: "Seen Speaker",
+                  style: "+Valence, -Arousal, -Dominance → -Valence, -Arousal, +Dominance",
+                  script: "Our thanks to gods oath.",
+                },
+                "0014_001077": {
+                  emotion: "Sad",
+                  speaker: "Seen Speaker",
+                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
+                  script: "Monster made a deep bow.",
                 },
               };
               for (var audio in audios) {
