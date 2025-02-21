@@ -627,7 +627,7 @@
         <!-- About Section Heading-->
         <div class="text-center">
           <h2 class="page-section-heading d-inline-block text-white">
-            Emotional Style Shift
+            Seen Speaker Emotional Style Shift
           </h2>
         </div>
         <!-- Icon Divider-->
@@ -655,36 +655,6 @@
                 "Style Shift (Strong)": "Style_shift_s",
               };
               audios = {
-                "0019_001448": {
-                  emotion: "Surprise",
-                  speaker: "Unseen Speaker",
-                  style: "+Valence, +Arousal, +Dominance → +Valence, +Arousal, -Dominance",
-                  script: "You are not a runaway, who are you?",
-                },
-                "0013_000721": {
-                  emotion: "Happy",
-                  speaker: "Unseen Speaker",
-                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
-                  script: "As rich as peters son in law !",
-                },
-                "0019_000377": {
-                  emotion: "Angry",
-                  speaker: "Unseen Speaker",
-                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
-                  script: "Monster made a deep bow .",
-                },
-                "0019_001077": {
-                  emotion: "Sad",
-                  speaker: "Unseen Speaker",
-                  style: "-Valence, -Arousal, +Dominance → +Valence, -Arousal, -Dominance",
-                  script: "Monster made a deep bow.",
-                },
-                "0013_001092": {
-                  emotion: "Sad",
-                  speaker: "Unseen Speaker",
-                  style: "+Valence, +Arousal, -Dominance → -Valence, -Arousal, +Dominance",
-                  script: "She may mind ye of her.",
-                },
                 "0016_001424": {
                   emotion: "Surprise ",
                   speaker: "Seen Speaker",
@@ -747,7 +717,84 @@
       </div>
     </section>
 
-    <section class="page-section bg-primary text-white mb-0" id="ablation_study">
+    <section class="page-section bg-primary text-white mb-0" id="emotion_style_shift">
+      <div class="container">
+        <!-- About Section Heading-->
+        <div class="text-center">
+          <h2 class="page-section-heading d-inline-block text-white">
+            Unseen Emotional Style Shift
+          </h2>
+        </div>
+        <!-- Icon Divider-->
+        <!-- <div class="divider-custom divider-light">
+          <div class="divider-custom"></div>
+        </div> -->
+
+        <div style="text-align: right; font-size: 14px;">
+          <p></p>
+          <p style="margin: 0px 0;">*Valence: the level of excitement or energy</p>
+          <p style="margin: 0px 0;">*Arousal: positivity or negativity of emotion</p>
+          <p style="margin: 0px 0;">*Dominance: control level within an emotional state</p>
+        </div>
+
+        <div class="row">
+          <div id="div61" class="col-lg-auto ml-auto">
+            <script>
+              dir = "./wavs/Style_shift";
+              exp = {
+                "Base Style (Weak)": "Base_style_w",
+                "Base Style (Medium)": "Base_style_m",
+                "Base Style (Strong)": "Base_style_s",
+                "Style Shift (Weak)": "Style_shift_w",
+                "Style Shift (Medium)": "Style_shift_m",
+                "Style Shift (Strong)": "Style_shift_s",
+              };
+              audios = {
+                "0019_001448": {
+                  emotion: "Surprise",
+                  speaker: "Unseen Speaker",
+                  style: "+Valence, +Arousal, +Dominance → +Valence, +Arousal, -Dominance",
+                  script: "You are not a runaway, who are you?",
+                },
+                "0013_000721": {
+                  emotion: "Happy",
+                  speaker: "Unseen Speaker",
+                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
+                  script: "As rich as peters son in law !",
+                },
+                "0019_000377": {
+                  emotion: "Angry",
+                  speaker: "Unseen Speaker",
+                  style: "-Valence, -Arousal, +Dominance → +Valence, +Arousal, -Dominance",
+                  script: "Monster made a deep bow .",
+                },
+                "0019_001077": {
+                  emotion: "Sad",
+                  speaker: "Unseen Speaker",
+                  style: "-Valence, -Arousal, +Dominance → +Valence, -Arousal, -Dominance",
+                  script: "Monster made a deep bow.",
+                },
+                "0013_001092": {
+                  emotion: "Sad",
+                  speaker: "Unseen Speaker",
+                  style: "+Valence, +Arousal, -Dominance → -Valence, -Arousal, +Dominance",
+                  script: "She may mind ye of her.",
+                },
+              };
+              for (var audio in audios) {
+                div = document.getElementById("div61");
+                script = audios[audio];
+                html = createTable4(dir, exp, audio, script);
+                // console.log(html)
+                div.insertAdjacentHTML("afterend", html);
+              }
+            </script>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section bg-info text-white mb-0" id="ablation_study">
       <div class="container">
         <!-- About Section Heading-->
         <div class="text-center">
